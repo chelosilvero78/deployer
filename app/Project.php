@@ -397,7 +397,7 @@ class Project extends Model implements PresentableInterface
     /**
      * Belongs to relationship.
      *
-     * @return Group
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function group()
     {
@@ -407,7 +407,7 @@ class Project extends Model implements PresentableInterface
     /**
      * Has many relationship.
      *
-     * @return Server
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function servers()
     {
@@ -418,7 +418,7 @@ class Project extends Model implements PresentableInterface
     /**
      * Has many relationship.
      *
-     * @return Heartbeat
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function heartbeats()
     {
@@ -429,7 +429,7 @@ class Project extends Model implements PresentableInterface
     /**
      * Has many relationship.
      *
-     * @return Notification
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function notifications()
     {
@@ -440,7 +440,7 @@ class Project extends Model implements PresentableInterface
     /**
      * Has many relationship.
      *
-     * @return Deployment
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function deployments()
     {
@@ -451,7 +451,7 @@ class Project extends Model implements PresentableInterface
     /**
      * Has many relationship.
      *
-     * @return SharedFile
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function notifyEmails()
     {
@@ -459,9 +459,19 @@ class Project extends Model implements PresentableInterface
     }
 
     /**
+     * Has many relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function channels()
+    {
+        return $this->hasMany(Channel::class);
+    }
+
+    /**
      * Has many urls to check.
      *
-     * @return CheckUrl
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function checkUrls()
     {
@@ -473,8 +483,8 @@ class Project extends Model implements PresentableInterface
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      *
-     * @see Project::tags()
-     * @see Project::branches()
+     * @see Project::getTagsAttribute()
+     * @see Project::getBranchesAttribute()
      */
     public function refs()
     {
