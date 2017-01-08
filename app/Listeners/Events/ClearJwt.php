@@ -11,14 +11,6 @@ use Illuminate\Support\Facades\Session;
 class ClearJwt extends Event
 {
     /**
-     * ClearJwt constructor.
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Handle the event.
      *
      * @param Logout $event

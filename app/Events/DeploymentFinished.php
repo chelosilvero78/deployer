@@ -8,7 +8,7 @@ use REBELinBLUE\Deployer\Deployment;
 /**
  * Deploy finished event.
  */
-class DeployFinished extends Event
+class DeploymentFinished extends Event
 {
     use SerializesModels;
 

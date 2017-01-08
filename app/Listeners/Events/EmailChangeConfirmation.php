@@ -18,14 +18,6 @@ class EmailChangeConfirmation extends Event implements ShouldQueue
     use InteractsWithQueue;
 
     /**
-     * EmailChangeConfirmation constructor.
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Handle the event.
      *
      * @param EmailChangeRequested $event

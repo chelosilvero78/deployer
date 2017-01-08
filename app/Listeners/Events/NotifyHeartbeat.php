@@ -14,14 +14,6 @@ class NotifyHeartbeat extends Event
     use DispatchesJobs;
 
     /**
-     * Create the event listener.
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Handle the event.
      *
      * @param HasSlackPayloadInterface $event
@@ -30,7 +22,7 @@ class NotifyHeartbeat extends Event
     public function handle(HasSlackPayloadInterface $event)
     {
         foreach ($event->heartbeat->project->notifications as $notification) {
-            $this->dispatch(new SlackNotify($notification, $event->notificationPayload()));
+            //$this->dispatch(new SlackNotify($notification, $event->notificationPayload()));
         }
     }
 }

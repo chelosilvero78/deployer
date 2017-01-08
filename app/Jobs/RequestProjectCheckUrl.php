@@ -34,10 +34,11 @@ class RequestProjectCheckUrl extends Job implements ShouldQueue
 
     /**
      * Execute the command.
-     * @dispatches SlackNotify
      */
     public function handle()
     {
+        return;
+
         foreach ($this->links as $link) {
             try {
                 // FIXME: Rebuild to use guzzle
@@ -54,7 +55,7 @@ class RequestProjectCheckUrl extends Job implements ShouldQueue
             if ($has_error) {
                 foreach ($link->project->notifications as $notification) {
                     try {
-                        $this->dispatch(new SlackNotify($notification, $link->notificationPayload()));
+                        //$this->dispatch(new SlackNotify($notification, $link->notificationPayload()));
                     } catch (\Exception $error) {
                         // Don't worry about this error
                     }

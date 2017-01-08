@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\Facades\Lang;
-use REBELinBLUE\Deployer\Jobs\SlackNotify;
 use REBELinBLUE\Deployer\Traits\BroadcastChanges;
 
 /**
  * Notification model.
+ * @deprecated
  */
 class Notification extends Model
 {
@@ -59,23 +59,10 @@ class Notification extends Model
     }
 
     /**
-     * Override the boot method to bind model event listeners.
-     * @dispatches SlackNotify
-     */
-    public static function boot()
-    {
-        parent::boot();
-
-        // When the notification has been saved queue a test
-        static::saved(function (Notification $model) {
-            $model->dispatch(new SlackNotify($model, $model->testPayload()));
-        });
-    }
-
-    /**
      * Generates a test payload for Slack.
      *
      * @return array
+     * @deprecated
      */
     public function testPayload()
     {

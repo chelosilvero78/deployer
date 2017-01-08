@@ -30,7 +30,7 @@ class CreateNotificationChannels extends Migration
         DB::table('notify_emails')->orderBy('id')->chunk(100, function ($rows) {
             $channels = [];
             foreach ($rows as $row) {
-                $channels[] = $this->channelData($row, ['email' => $row->email], 'email');
+                $channels[] = $this->channelData($row, ['email' => $row->email], 'mail');
             }
 
             DB::table('channels')->insert($channels);
@@ -44,7 +44,7 @@ class CreateNotificationChannels extends Migration
                 $channels[] = $this->channelData($row, [
                     'webhook' => $row->webhook,
                     'channel' => $row->channel,
-                    'icon'    => $row->icon
+                    'icon'    => empty($row->icon) ? null : $row->icon
                 ], 'slack');
             }
 
@@ -61,7 +61,7 @@ class CreateNotificationChannels extends Migration
             'project_id' => $row->project_id,
             'type'       => $type,
             'name'       => $row->name,
-            'config'     => json_encode($config, JSON_FORCE_OBJECT),
+            'config'     => json_encode($config),
             'created_at' => $row->created_at,
             'deleted_at' => $row->deleted_at,
             'updated_at' => $row->updated_at,

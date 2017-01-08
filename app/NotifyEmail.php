@@ -9,6 +9,7 @@ use REBELinBLUE\Deployer\Traits\BroadcastChanges;
 
 /**
  * Email list for a deployment notification.
+ * @deprecated
  */
 class NotifyEmail extends Model
 {

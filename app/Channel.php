@@ -4,6 +4,7 @@ namespace REBELinBLUE\Deployer;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
 use REBELinBLUE\Deployer\Traits\BroadcastChanges;
 
 /**
@@ -11,7 +12,12 @@ use REBELinBLUE\Deployer\Traits\BroadcastChanges;
  */
 class Channel extends Model
 {
-    use SoftDeletes, BroadcastChanges;
+    use SoftDeletes, BroadcastChanges, Notifiable;
+
+    const EMAIL = 'mail';
+    const SLACK = 'slack';
+    const HIPCHAT = 'hipchat';
+    const WEBHOOK = 'webhook';
 
     /**
      * The attributes that are mass assignable.
@@ -33,8 +39,9 @@ class Channel extends Model
      * @var array
      */
     protected $casts = [
-        'id'           => 'integer',
-        'project_id'   => 'integer',
+        'id'         => 'integer',
+        'project_id' => 'integer',
+        'config'     => 'object',
     ];
 
     /**
@@ -45,5 +52,47 @@ class Channel extends Model
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    /**
+     * Returns the email address to send the notification to.
+     *
+     * @return string|null
+     */
+    public function routeNotificationForMail()
+    {
+        if ($this->type === self::EMAIL) {
+            return $this->config->email;
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns the URL for the slack webhook.
+     *
+     * @return string|null
+     */
+    public function routeNotificationForSlack()
+    {
+        if ($this->type === self::SLACK) {
+            return $this->config->webhook;
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns the URL for the custom webhook.
+     *
+     * @return string|null
+     */
+    public function routeNotificationForWebhook()
+    {
+        if ($this->type === self::WEBHOOK) {
+            return $this->config->url;
+        }
+
+        return null;
     }
 }

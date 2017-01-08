@@ -31,6 +31,7 @@ class HeartbeatRecovered extends Event implements HasSlackPayloadInterface
 
     /**
      * @return array
+     * @deprecated
      */
     public function notificationPayload()
     {

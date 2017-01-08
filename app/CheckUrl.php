@@ -86,6 +86,7 @@ class CheckUrl extends Model
      * Generates a slack payload for the link failure.
      *
      * @return array
+     * @deprecated
      */
     public function notificationPayload()
     {

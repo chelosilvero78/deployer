@@ -43,35 +43,37 @@ class LatestRelease implements LatestReleaseInterface
     {
         $cache_for = self::CACHE_TIME_IN_HOURS * 60;
 
-        $release = $this->cache->remember('latest_version', $cache_for, function () {
+        return false; // FIXME
 
-            // FIXME: Rebuild to use guzzle
-            $request = Request::get($this->github_url)
-                              ->timeoutIn(5)
-                              ->expectsJson()
-                              ->withAccept('application/vnd.github.v3+json');
-
-            if (config('deployer.github_oauth_token')) {
-                $request->withAuthorization('token ' . config('deployer.github_oauth_token'));
-            }
-
-            try {
-                $response = $request->send();
-            } catch (ConnectionErrorException $exception) {
-                return false;
-            }
-
-            if ($response->hasErrors()) {
-                return false;
-            }
-
-            return $response->body;
-        });
-
-        if (is_object($release)) {
-            return $release->tag_name;
-        }
-
-        return false;
+//        $release = $this->cache->remember('latest_version', $cache_for, function () {
+//
+//            // FIXME: Rebuild to use guzzle
+//            $request = Request::get($this->github_url)
+//                              ->timeoutIn(5)
+//                              ->expectsJson()
+//                              ->withAccept('application/vnd.github.v3+json');
+//
+//            if (config('deployer.github_oauth_token')) {
+//                $request->withAuthorization('token ' . config('deployer.github_oauth_token'));
+//            }
+//
+//            try {
+//                $response = $request->send();
+//            } catch (ConnectionErrorException $exception) {
+//                return false;
+//            }
+//
+//            if ($response->hasErrors()) {
+//                return false;
+//            }
+//
+//            return $response->body;
+//        });
+//
+//        if (is_object($release)) {
+//            return $release->tag_name;
+//        }
+//
+//        return false;
     }
 }

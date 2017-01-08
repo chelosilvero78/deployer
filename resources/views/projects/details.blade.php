@@ -125,8 +125,8 @@
         app.Servers.add({!! $servers->toJson() !!});
         app.SharedFiles.add({!! $sharedFiles->toJson() !!});
         app.ConfigFiles.add({!! $configFiles->toJson() !!});
-        app.Notifications.add({!! $notifications->toJson() !!});
-        app.NotifyEmails.add({!! $notifyEmails->toJson() !!});
+        //app.Notifications.add(notifications->toJson());
+        //app.NotifyEmails.add(notifyEmails->toJson());
         app.Heartbeats.add({!! $heartbeats->toJson() !!});
         app.CheckUrls.add({!! $checkUrls->toJson() !!});
         app.Variables.add({!! $variables->toJson() !!});

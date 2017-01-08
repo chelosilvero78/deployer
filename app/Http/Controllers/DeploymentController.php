@@ -65,8 +65,8 @@ class DeploymentController extends Controller
             'last_week'     => $this->deploymentRepository->getLastWeekCount($project_id),
             'project'       => $project,
             'servers'       => $project->servers,
-            'notifications' => $project->notifications,
-            'notifyEmails'  => $project->notifyEmails,
+            'notifications' => [], //$project->notifications,
+            'notifyEmails'  => [], //$project->notifyEmails,  // FIXME
             'heartbeats'    => $project->heartbeats,
             'sharedFiles'   => $project->sharedFiles,
             'configFiles'   => $project->configFiles,
