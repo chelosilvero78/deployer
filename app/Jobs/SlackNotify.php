@@ -73,6 +73,7 @@ class SlackNotify extends Job implements ShouldQueue
             }
         }
 
+        // FIXME: Rebuild to use guzzle
         Request::post($this->notification->webhook)
                ->sendsJson()
                ->body($payload)

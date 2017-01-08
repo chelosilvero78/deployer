@@ -40,6 +40,7 @@ class RequestProjectCheckUrl extends Job implements ShouldQueue
     {
         foreach ($this->links as $link) {
             try {
+                // FIXME: Rebuild to use guzzle
                 $response = Request::get($link->url)->send();
 
                 $has_error = $response->hasErrors();

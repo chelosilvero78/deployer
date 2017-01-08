@@ -44,6 +44,8 @@ class LatestRelease implements LatestReleaseInterface
         $cache_for = self::CACHE_TIME_IN_HOURS * 60;
 
         $release = $this->cache->remember('latest_version', $cache_for, function () {
+
+            // FIXME: Rebuild to use guzzle
             $request = Request::get($this->github_url)
                               ->timeoutIn(5)
                               ->expectsJson()
