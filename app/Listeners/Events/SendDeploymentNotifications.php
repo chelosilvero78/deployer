@@ -6,8 +6,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Queue\InteractsWithQueue;
 use REBELinBLUE\Deployer\Events\DeploymentFinished;
-use REBELinBLUE\Deployer\Notifications\DeploymentSucceeded;
 use REBELinBLUE\Deployer\Notifications\DeploymentFailed;
+use REBELinBLUE\Deployer\Notifications\DeploymentSucceeded;
 
 /**
  * When a deploy finished, notify the followed user.
@@ -23,7 +23,7 @@ class SendDeploymentNotifications extends Event implements ShouldQueue
      */
     public function handle(DeploymentFinished $event)
     {
-        $project = $event->deployment->project;
+        $project    = $event->deployment->project;
         $deployment = $event->deployment;
 
         if ($deployment->isAborted()) {

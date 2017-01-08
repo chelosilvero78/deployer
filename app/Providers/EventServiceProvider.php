@@ -14,8 +14,8 @@ use REBELinBLUE\Deployer\Events\UserWasCreated;
 use REBELinBLUE\Deployer\Listeners\Events\ClearJwt;
 use REBELinBLUE\Deployer\Listeners\Events\CreateJwt;
 use REBELinBLUE\Deployer\Listeners\Events\EmailChangeConfirmation;
-use REBELinBLUE\Deployer\Listeners\Events\SendDeploymentNotifications;
 use REBELinBLUE\Deployer\Listeners\Events\NotifyHeartbeat;
+use REBELinBLUE\Deployer\Listeners\Events\SendDeploymentNotifications;
 use REBELinBLUE\Deployer\Listeners\Events\SendSignupEmail;
 use REBELinBLUE\Deployer\Listeners\Events\TestProjectUrls;
 

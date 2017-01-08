@@ -14,8 +14,8 @@ class Channel extends Model
 {
     use SoftDeletes, BroadcastChanges, Notifiable;
 
-    const EMAIL = 'mail';
-    const SLACK = 'slack';
+    const EMAIL   = 'mail';
+    const SLACK   = 'slack';
     const HIPCHAT = 'hipchat';
     const WEBHOOK = 'webhook';
 
@@ -65,7 +65,7 @@ class Channel extends Model
             return $this->config->email;
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -79,7 +79,7 @@ class Channel extends Model
             return $this->config->webhook;
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -93,6 +93,6 @@ class Channel extends Model
             return $this->config->url;
         }
 
-        return null;
+        return;
     }
 }

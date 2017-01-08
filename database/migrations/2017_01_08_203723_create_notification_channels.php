@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class CreateNotificationChannels extends Migration
 {
@@ -44,7 +44,7 @@ class CreateNotificationChannels extends Migration
                 $channels[] = $this->channelData($row, [
                     'webhook' => $row->webhook,
                     'channel' => $row->channel,
-                    'icon'    => empty($row->icon) ? null : $row->icon
+                    'icon'    => empty($row->icon) ? null : $row->icon,
                 ], 'slack');
             }
 

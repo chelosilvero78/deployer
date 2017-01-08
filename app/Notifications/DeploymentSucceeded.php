@@ -58,7 +58,7 @@ class DeploymentSucceeded extends Notification implements ShouldQueue
     /**
      * Get the mail representation of the notification.
      *
-     * @param  Channel $notification
+     * @param  Channel     $notification
      * @return MailMessage
      */
     public function toMail(Channel $notification)
@@ -92,7 +92,7 @@ class DeploymentSucceeded extends Notification implements ShouldQueue
     /**
      * Get the slack version of the notification.
      *
-     * @param Channel $notification
+     * @param  Channel      $notification
      * @return SlackMessage
      */
     public function toSlack(Channel $notification)
@@ -106,7 +106,7 @@ class DeploymentSucceeded extends Notification implements ShouldQueue
     /**
      * Get the webhook version of the notification.
      *
-     * @param Channel $notification
+     * @param  Channel        $notification
      * @return WebhookMessage
      */
     public function toWebhook(Channel $notification)
@@ -114,10 +114,10 @@ class DeploymentSucceeded extends Notification implements ShouldQueue
         return (new WebhookMessage)
             ->data([
                 'payload' => [
-                    'webhook' => 'data'
-                ]
+                    'webhook' => 'data',
+                ],
             ])
-            ->userAgent("Custom-User-Agent")
+            ->userAgent('Custom-User-Agent')
             ->header('X-Custom', 'Custom-Header');
     }
 }

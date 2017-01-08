@@ -17,7 +17,7 @@ class ChannelTableSeeder extends Seeder
                 'channel' => '#testing',
                 'icon'    => ':ghost:',
                 'webhook' => 'https://hooks.slack.com/services/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',
-            ]
+            ],
         ]);
 
         Channel::create([
@@ -26,7 +26,7 @@ class ChannelTableSeeder extends Seeder
             'name'       => 'Deployer',
             'config'     => [
                 'email' => 'admin@example.com',
-            ]
+            ],
         ]);
 
         Channel::create([
@@ -35,7 +35,7 @@ class ChannelTableSeeder extends Seeder
             'name'       => 'Deployer',
             'config'     => [
                 'url' => 'http://requestb.in/19kiuuc1',
-            ]
+            ],
         ]);
     }
 }
