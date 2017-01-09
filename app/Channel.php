@@ -39,9 +39,15 @@ class Channel extends Model
      * @var array
      */
     protected $casts = [
-        'id'         => 'integer',
-        'project_id' => 'integer',
-        'config'     => 'object',
+        'id'                     => 'integer',
+        'project_id'             => 'integer',
+        'config'                 => 'object',
+        'on_deployment_success'  => 'boolean',
+        'on_deployment_failure'  => 'boolean',
+        'on_link_down'           => 'boolean',
+        'on_link_recovered'      => 'boolean',
+        'on_heartbeat_missing'   => 'boolean',
+        'on_heartbeat_recovered' => 'boolean',
     ];
 
     /**

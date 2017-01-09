@@ -21,6 +21,12 @@ class CreateNotificationChannels extends Migration
             $table->string('name');
             $table->string('type');
             $table->text('config');
+            $table->boolean('on_deployment_success')->default(false);
+            $table->boolean('on_deployment_failure')->default(false);
+            $table->boolean('on_link_down')->default(false);
+            $table->boolean('on_link_recovered')->default(false);
+            $table->boolean('on_heartbeat_missing')->default(false);
+            $table->boolean('on_heartbeat_recovered')->default(false);
             $table->unsignedInteger('project_id');
             $table->timestamps();
             $table->softDeletes();
@@ -30,13 +36,13 @@ class CreateNotificationChannels extends Migration
         DB::table('notify_emails')->orderBy('id')->chunk(100, function ($rows) {
             $channels = [];
             foreach ($rows as $row) {
-                $channels[] = $this->channelData($row, ['email' => $row->email], 'mail');
+                $channels[] = $this->channelData($row, [
+                    'email' => $row->email
+                ], 'mail');
             }
 
             DB::table('channels')->insert($channels);
         });
-
-        // FIXME: failure_only
 
         DB::table('slack')->orderBy('id')->chunk(100, function ($rows) {
             $channels = [];
@@ -57,14 +63,30 @@ class CreateNotificationChannels extends Migration
 
     private function channelData(stdClass $row, array $config, $type)
     {
+        $is_slack = ($type === 'slack');
+
+        $on_success = true;
+        $on_failure = $is_slack;
+
+        if ($type === 'slack' && $row->failure_only === 0) {
+            $on_success = false;
+        }
+
         return [
-            'project_id' => $row->project_id,
-            'type'       => $type,
-            'name'       => $row->name,
-            'config'     => json_encode($config),
-            'created_at' => $row->created_at,
-            'deleted_at' => $row->deleted_at,
-            'updated_at' => $row->updated_at,
+            'project_id'             => $row->project_id,
+            'type'                   => $type,
+            'name'                   => $row->name,
+            'config'                 => json_encode($config),
+            'created_at'             => $row->created_at,
+            'deleted_at'             => $row->deleted_at,
+            'updated_at'             => $row->updated_at,
+            // Set the values to maintain previous behaviour
+            'on_deployment_success'  => $on_success,
+            'on_deployment_failure'  => $on_failure,
+            'on_link_down'           => $is_slack,
+            'on_link_recovered'      => false,
+            'on_heartbeat_missing'   => $is_slack,
+            'on_heartbeat_recovered' => $is_slack,
         ];
     }
 
