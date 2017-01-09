@@ -16,7 +16,7 @@ var app = app || {};
         $('.label-danger', modal).remove();
 
         if (button.hasClass('btn-edit')) {
-            title = Lang.get('channels.edit');
+            title = Lang.get('channels.edit'); //FIXME: Show correct title
             $('.btn-danger', modal).show();
             $('#notification .modal-footer').show();
         } else {
@@ -25,7 +25,7 @@ var app = app || {};
             $('#notification_webhook').val('');
             $('#notification_channel').val('');
             $('#notification_icon').val('');
-            $('#notification_failure_only').prop('checked', true);
+            //$('#notification_failure_only').prop('checked', true);
             $('#notification .modal-footer').hide();
         }
 
@@ -38,10 +38,33 @@ var app = app || {};
 
         $('#notification .modal-footer').show();
         $('#channel-type').hide();
-        $('#channel-config-' + type).show();
         $('#channel-name').show();
         $('#channel-triggers').show();
+
+        setTitleWithIcon(type, 'create');
     });
+
+    function setTitleWithIcon(type, action) {
+        $('#notification .modal-title span').text(Lang.get('channels.' + action + '_' + type));
+
+        var element = $('#notification .modal-title i').removeClass().addClass('fa');
+        var icon = 'cogs';
+
+        if (type === 'slack') {
+            icon = 'slack';
+        } else if (type === 'hipchat') {
+            element.addClass('fa-flip-horizontal');
+            icon = 'comment-o';
+        } else if (type === 'email') {
+            icon = 'envelope-o';
+        } else if (type === 'twilio') {
+            icon = 'mobile';
+        }
+
+        element.addClass('fa-' + icon);
+
+        $('#channel-config-' + type).show();
+    }
 
     // FIXME: This seems very wrong
     $('#notification button.btn-delete').on('click', function (event) {
@@ -97,7 +120,7 @@ var app = app || {};
             channel:      $('#notification_channel').val(),
             icon:         $('#notification_icon').val(),
             project_id:   $('input[name="project_id"]').val(),
-            failure_only: $('#notification_failure_only').is(':checked')
+            //failure_only: $('#notification_failure_only').is(':checked')
         }, {
             wait: true,
             success: function(model, response, options) {
@@ -255,7 +278,7 @@ var app = app || {};
             $('#notification_webhook').val(this.model.get('webhook'));
             $('#notification_channel').val(this.model.get('channel'));
             $('#notification_icon').val(this.model.get('icon'));
-            $('#notification_failure_only').prop('checked', (this.model.get('failure_only') === true));
+            //$('#notification_failure_only').prop('checked', (this.model.get('failure_only') === true));
         }
     });
 })(jQuery);

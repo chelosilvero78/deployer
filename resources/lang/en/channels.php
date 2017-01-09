@@ -4,7 +4,17 @@ return [
 
     'label'                  => 'Notifications',
     'create'                 => 'Add a new notification',
+    'create_slack'           => 'Add a new Slack notification',
+    'create_hipchat'         => 'Add a new Hipchat notification',
+    'create_twilio'          => 'Add a new Twilio notification',
+    'create_email'           => 'Add a new e-mail notification',
+    'create_custom'          => 'Add a new custom notification',
     'edit'                   => 'Edit the notification',
+    'edit_slack'             => 'Edit the Slack notification',
+    'edit_hipchat'           => 'Edit the Hipchat notification',
+    'edit_twilio'            => 'Edit the Twilio notification',
+    'edit_email'             => 'Edit the e-mail notification',
+    'edit_custom'            => 'Edit the custom notification',
     'none'                   => 'The project does not currently have any notifications setup',
     'name'                   => 'Name',
     'type'                   => 'Type',
@@ -16,14 +26,11 @@ return [
     'on_link_recovered'      => 'URL Recovered',
     'on_heartbeat_missing'   => 'Heartbeat Missing',
     'on_heartbeat_recovered' => 'Heartbeat Recovered',
-
-    // Types
     'custom'                 => 'Custom',
     'slack'                  => 'Slack',
     'hipchat'                => 'Hipchat',
-    'twilio'                 => 'SMS',
+    'twilio'                 => 'Twilio',
     'mail'                   => 'E-mail',
-
     'which'                  => 'Which type of notification do you wish to add?',
 
     // Slack
@@ -32,5 +39,10 @@ return [
     'icon_info'             => 'Either an emoji, for example :ghost: or the URL to an image',
     'webhook'               => 'Webhook URL',
     'channel'               => 'Channel',
+
+    // Hipchat
+    // Twilio
+    // Email
+    // Custom
 
 ];

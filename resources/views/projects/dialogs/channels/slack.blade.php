@@ -1,4 +1,3 @@
-<!-- Slack -->
 <div class="channel-config" id="channel-config-slack">
     <div class="form-group">
         <label for="notification_icon">{{ Lang::get('channels.icon') }}</label>
