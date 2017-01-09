@@ -15,7 +15,7 @@ use REBELinBLUE\Deployer\Deployment;
 use REBELinBLUE\Deployer\Project;
 
 /**
- * Notification sent when a deployment finishes.
+ * Notification which is sent when a deployment succeeds.
  */
 class DeploymentSucceeded extends Notification implements ShouldQueue
 {

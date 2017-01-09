@@ -7,19 +7,12 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class HeartbeatRecovered extends Notification
+/**
+ * Notification which is sent when a heartbeat recovers.
+ */
+class HeartbeatRecovered extends Notification implements ShouldQueue
 {
     use Queueable;
-
-    /**
-     * Create a new notification instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
 
     /**
      * Get the notification's delivery channels.

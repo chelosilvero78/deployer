@@ -7,19 +7,12 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class HeartbeatMissing extends Notification
+/**
+ * Notification which is sent when a heartbeat is missing.
+ */
+class HeartbeatMissing extends Notification implements ShouldQueue
 {
     use Queueable;
-
-    /**
-     * Create a new notification instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
 
     /**
      * Get the notification's delivery channels.

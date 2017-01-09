@@ -7,19 +7,12 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class DeploymentFailed extends Notification
+/**
+ * Notification which is sent when deployment fails.
+ */
+class DeploymentFailed extends Notification implements ShouldQueue
 {
     use Queueable;
-
-    /**
-     * Create a new notification instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
 
     /**
      * Get the notification's delivery channels.
