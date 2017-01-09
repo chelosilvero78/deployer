@@ -66,7 +66,6 @@ class DeploymentController extends Controller
             'project'       => $project,
             'servers'       => $project->servers,
             'notifications' => [], //$project->notifications,
-            'notifyEmails'  => [], //$project->notifyEmails,  // FIXME
             'heartbeats'    => $project->heartbeats,
             'sharedFiles'   => $project->sharedFiles,
             'configFiles'   => $project->configFiles,

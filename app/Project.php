@@ -32,7 +32,7 @@ class Project extends Model implements PresentableInterface
      * @var array
      */
     protected $hidden = ['private_key', 'created_at', 'deleted_at', 'updated_at', 'hash',
-                         'updated_at', 'servers', 'commands', 'hash', 'notifyEmails',
+                         'updated_at', 'servers', 'commands', 'hash',
                          'group', 'servers', 'commands', 'heartbeats', 'checkUrls',
                          'notifications', 'deployments', 'shareFiles', 'configFiles', ];
 
@@ -431,17 +431,6 @@ class Project extends Model implements PresentableInterface
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function notifications()
-    {
-        return $this->hasMany(Notification::class)
-                    ->orderBy('name');
-    }
-
-    /**
-     * Has many relationship.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function deployments()
     {
         return $this->hasMany(Deployment::class)
@@ -453,19 +442,10 @@ class Project extends Model implements PresentableInterface
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function notifyEmails()
-    {
-        return $this->hasMany(NotifyEmail::class);
-    }
-
-    /**
-     * Has many relationship.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function channels()
     {
-        return $this->hasMany(Channel::class);
+        return $this->hasMany(Channel::class)
+                    ->orderBy('name');
     }
 
     /**

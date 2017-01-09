@@ -96,7 +96,6 @@
     @include('projects.dialogs.channel')
     @include('projects.dialogs.webhook')
     @include('projects.dialogs.variable')
-    @include('projects.dialogs.notify_email')
     @include('projects.dialogs.heartbeat')
     @include('projects.dialogs.check_urls')
     @include('projects.dialogs.key')
@@ -117,7 +116,6 @@
         new app.SharedFilesTab();
         new app.ConfigFilesTab();
         new app.NotificationsTab();
-        new app.NotifyEmailsTab();
         new app.HeartbeatsTab();
         new app.VariablesTab();
         new app.CheckUrlsTab();
@@ -126,7 +124,6 @@
         app.SharedFiles.add({!! $sharedFiles->toJson() !!});
         app.ConfigFiles.add({!! $configFiles->toJson() !!});
         //app.Notifications.add(notifications->toJson());
-        //app.NotifyEmails.add(notifyEmails->toJson());
         app.Heartbeats.add({!! $heartbeats->toJson() !!});
         app.CheckUrls.add({!! $checkUrls->toJson() !!});
         app.Variables.add({!! $variables->toJson() !!});
