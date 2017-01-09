@@ -2,27 +2,27 @@
 
 return [
 
-    'label'               => 'Notifications',
-    'create'              => 'Add a new notification',
-    'edit'                => 'Edit the notification',
-    'none'                => 'The project does not currently have any notifications setup',
-    'name'                => 'Name',
-    'channel'             => 'Channel',
-    'warning'             => 'The notification could not be saved, please check the form below.',
-    'icon'                => 'Icon',
-    'bot'                 => 'Bot',
-    'icon_info'           => 'Either an emoji, for example :ghost: or the URL to an image',
-    'webhook'             => 'Webhook URL',
-//    'test_message'        => 'This is a test to ensure the notification is setup correctly, if you ' .
-//                             'can see this it means it is! :+1:',
+    // Slack
+    'test_message'        => 'This is a test to ensure the notification is setup correctly, if you ' .
+                             'can see this it means it is! :+1:',
     'success_message'     => 'Deployment %s successful! :smile:',
     'failed_message'      => 'Deployment %s failed! :cry:',
+
+    // Deployment success email
+    'deployment_done'    => 'Deployment Finished',
+    'deployment_header'  => 'The deployment has finished.',
+    'project_name'       => 'Project name',
+    'deployed_branch'    => 'Deployed branch',
+    'deployment_details' => 'View the Deployment',
+    'started_at'         => 'Started at',
+    'finished_at'        => 'Finished at',
+    'last_committer'     => 'Last committer',
+    'last_commit'        => 'Last commit',
+    'reason'             => 'Deployment reason - :reason',
+
+    // TODO cleanup - Used by slack success currently
     'branch'              => 'Branch',
     'project'             => 'Project',
     'commit'              => 'Commit',
     'committer'           => 'Committer',
-    'failure_only'        => 'Failure Only',
-    'notify_failure_only' => 'Notify only on Failure',
-    'failure_description' => 'Only notify this channel on failure',
-
 ];

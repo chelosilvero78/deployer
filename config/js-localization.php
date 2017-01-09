@@ -42,7 +42,7 @@ return [
         'templates'     => ['create', 'edit'],
         'sharedFiles'   => ['create', 'edit'],
         'configFiles'   => ['create', 'edit'],
-        'notifications' => ['create', 'edit'],
+        'channels'      => ['create', 'edit', 'custom', 'slack', 'hipchat', 'twilio', 'mail'],
         'servers'       => ['create', 'edit', 'successful', 'testing', 'failed', 'untested'],
         'heartbeats'    => ['create', 'edit', 'ok', 'untested', 'missing', 'interval_10', 'interval_30',
                             'interval_60', 'interval_120', 'interval_720', 'interval_1440', 'interval_10080', ]

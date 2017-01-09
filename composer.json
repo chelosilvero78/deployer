@@ -39,7 +39,8 @@
         "fideloper/proxy": "^3.1",
         "laravel-notification-channels/webhook": "^1.0",
         "laravel-notification-channels/hipchat": "^0.1.0",
-        "guzzlehttp/guzzle": "^6.2"
+        "guzzlehttp/guzzle": "^6.2",
+        "laravel-notification-channels/twilio": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.5",

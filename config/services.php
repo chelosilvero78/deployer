@@ -35,4 +35,16 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'hipchat' => [
+        'token' => env('HIPCHAT_TOKEN'),
+        'room' => 'Notifications',
+        'url' => 'https://api.your.hipchat.server.com',
+    ],
+
+    'twilio' => [
+        'account_sid' => env('TWILIO_ACCOUNT_SID'),
+        'auth_token' => env('TWILIO_AUTH_TOKEN'),
+        'from' => env('TWILIO_FROM'),
+    ],
+
 ];

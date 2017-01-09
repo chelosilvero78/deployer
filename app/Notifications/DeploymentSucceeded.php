@@ -64,12 +64,12 @@ class DeploymentSucceeded extends Notification implements ShouldQueue
     public function toMail(Channel $notification)
     {
         $table = [
-            Lang::get('emails.project_name')    => $this->project->name,
-            Lang::get('emails.deployed_branch') => $this->deployment->branch,
-            Lang::get('emails.started_at')      => $this->deployment->started_at,
-            Lang::get('emails.finished_at')     => $this->deployment->finished_at,
-            Lang::get('emails.last_committer')  => $this->deployment->committer,
-            Lang::get('emails.last_commit')     => $this->deployment->short_commit,
+            Lang::get('notifications.project_name')    => $this->project->name,
+            Lang::get('notifications.deployed_branch') => $this->deployment->branch,
+            Lang::get('notifications.started_at')      => $this->deployment->started_at,
+            Lang::get('notifications.finished_at')     => $this->deployment->finished_at,
+            Lang::get('notifications.last_committer')  => $this->deployment->committer,
+            Lang::get('notifications.last_commit')     => $this->deployment->short_commit,
         ];
 
         $email = (new MailMessage)
@@ -78,12 +78,12 @@ class DeploymentSucceeded extends Notification implements ShouldQueue
                 'table' => $table,
             ])
             ->to($notification->config->email)
-            ->subject(Lang::get('emails.deployment_done'))
-            ->line(Lang::get('emails.deployment_header'))
-            ->action(Lang::get('emails.deployment_details'), route('deployments', ['id' => $this->deployment->id]));
+            ->subject(Lang::get('notifications.deployment_done'))
+            ->line(Lang::get('notifications.deployment_header'))
+            ->action(Lang::get('notifications.deployment_details'), route('deployments', ['id' => $this->deployment->id]));
 
         if (!empty($this->deployment->reason)) {
-            $email->line(Lang::get('emails.reason', ['reason' => $this->deployment->reason]));
+            $email->line(Lang::get('notifications.reason', ['reason' => $this->deployment->reason]));
         }
 
         return $email;

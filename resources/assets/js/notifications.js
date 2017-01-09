@@ -5,7 +5,10 @@ var app = app || {};
     $('#notification').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var modal = $(this);
-        var title = Lang.get('notifications.create');
+        var title = Lang.get('channels.create');
+
+        $('.channel-config').hide();
+        $('#channel-type').show();
 
         $('.btn-danger', modal).hide();
         $('.callout-danger', modal).hide();
@@ -13,8 +16,9 @@ var app = app || {};
         $('.label-danger', modal).remove();
 
         if (button.hasClass('btn-edit')) {
-            title = Lang.get('notifications.edit');
+            title = Lang.get('channels.edit');
             $('.btn-danger', modal).show();
+            $('#notification .modal-footer').show();
         } else {
             $('#notification_id').val('');
             $('#notification_name').val('');
@@ -22,9 +26,21 @@ var app = app || {};
             $('#notification_channel').val('');
             $('#notification_icon').val('');
             $('#notification_failure_only').prop('checked', true);
+            $('#notification .modal-footer').hide();
         }
 
         modal.find('.modal-title span').text(title);
+    });
+
+    $('#notification #channel-type a.btn-app').on('click', function(event) {
+        var button = $(event.currentTarget);
+        var type = button.data('type');
+
+        $('#notification .modal-footer').show();
+        $('#channel-type').hide();
+        $('#channel-config-' + type).show();
+        $('#channel-name').show();
+        $('#channel-triggers').show();
     });
 
     // FIXME: This seems very wrong
@@ -210,6 +226,23 @@ var app = app || {};
         },
         render: function () {
             var data = this.model.toJSON();
+
+            data.icon = 'cogs';
+            data.label = Lang.get('channels.custom');
+
+            if (this.model.get('type') !== 'webhook') {
+                data.label = Lang.get('channels.' + this.model.get('type'));
+            }
+
+            if (this.model.get('type') === 'slack') {
+                data.icon = 'slack';
+            } else if (this.model.get('type') === 'hipchat') {
+                data.icon = 'comment-o fa-flip-horizontal';
+            } else if (this.model.get('type') === 'mail') {
+                data.icon = 'envelope-o';
+            } else if (this.model.get('type') === 'twilio') {
+                data.icon = 'mobile';
+            }
 
             this.$el.html(this.template(data));
 

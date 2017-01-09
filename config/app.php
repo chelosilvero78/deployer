@@ -176,6 +176,8 @@ return [
         BackupManager\Laravel\Laravel5ServiceProvider::class,
         JsLocalization\JsLocalizationServiceProvider::class,
         Fideloper\Proxy\TrustedProxyServiceProvider::class,
+        NotificationChannels\Twilio\TwilioProvider::class,
+        NotificationChannels\HipChat\HipChatServiceProvider::class,
 
         /*
          * Application Service Providers...
