@@ -72,6 +72,8 @@ class DeploymentSucceeded extends Notification implements ShouldQueue
             Lang::get('notifications.last_commit')     => $this->deployment->short_commit,
         ];
 
+        $action = route('deployments', ['id' => $this->deployment->id]);
+
         $email = (new MailMessage)
             ->view(['notifications.email', 'notifications.email-plain'], [
                 'name'  => $notification->name,
@@ -80,7 +82,7 @@ class DeploymentSucceeded extends Notification implements ShouldQueue
             ->to($notification->config->email)
             ->subject(Lang::get('notifications.deployment_done'))
             ->line(Lang::get('notifications.deployment_header'))
-            ->action(Lang::get('notifications.deployment_details'), route('deployments', ['id' => $this->deployment->id]));
+            ->action(Lang::get('notifications.deployment_details'), $action);
 
         if (!empty($this->deployment->reason)) {
             $email->line(Lang::get('notifications.reason', ['reason' => $this->deployment->reason]));

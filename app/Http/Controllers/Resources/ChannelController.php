@@ -31,11 +31,7 @@ class ChannelController extends ResourceController
     {
         return $this->repository->create($request->only(
             'name',
-            'project_id',
-//            'channel',
-//            'webhook',
-//            'icon',
-//            'failure_only'
+            'project_id'
         ));
     }
 
@@ -50,11 +46,7 @@ class ChannelController extends ResourceController
     public function update($channel_id, StoreChannelRequest $request)
     {
         return $this->repository->updateById($request->only(
-            'name',
-//            'channel',
-//            'webhook',
-//            'icon',
-//            'failure_only'
+            'name'
         ), $channel_id);
     }
 }
