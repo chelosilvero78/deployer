@@ -19,7 +19,7 @@
                             <a class="btn btn-app" data-type="slack"><i class="fa fa-slack"></i> {{ Lang::get('channels.slack') }}</a>
                             <a class="btn btn-app" data-type="hipchat"><i class="fa fa-comment-o fa-flip-horizontal"></i> {{ Lang::get('channels.hipchat') }}</a>
                             <a class="btn btn-app" data-type="twilio"><i class="fa fa-mobile"></i> {{ Lang::get('channels.twilio') }}</a>
-                            <a class="btn btn-app" data-type="email"><i class="fa fa-envelope-o"></i> {{ Lang::get('channels.mail') }}</a>
+                            <a class="btn btn-app" data-type="mail"><i class="fa fa-envelope-o"></i> {{ Lang::get('channels.mail') }}</a>
                             <a class="btn btn-app" data-type="custom"><i class="fa fa-cogs"></i> {{ Lang::get('channels.custom') }}</a>
                         </div>
                     </div>

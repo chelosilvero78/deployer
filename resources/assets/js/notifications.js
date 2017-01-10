@@ -5,10 +5,6 @@ var app = app || {};
     $('#notification').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var modal = $(this);
-        var title = Lang.get('channels.create');
-
-        $('.channel-config').hide();
-        $('#channel-type').show();
 
         $('.btn-danger', modal).hide();
         $('.callout-danger', modal).hide();
@@ -16,31 +12,24 @@ var app = app || {};
         $('.label-danger', modal).remove();
 
         if (button.hasClass('btn-edit')) {
-            title = Lang.get('channels.edit'); //FIXME: Show correct title
             $('.btn-danger', modal).show();
-            $('#notification .modal-footer').show();
         } else {
             $('#notification_id').val('');
             $('#notification_name').val('');
-            $('#notification_webhook').val('');
-            $('#notification_channel').val('');
-            $('#notification_icon').val('');
-            //$('#notification_failure_only').prop('checked', true);
+            // $('#notification_webhook').val('');
+            // $('#notification_channel').val('');
+            // $('#notification_icon').val('');
+            $('#notification .channel-config input[type=checkbox]').prop('checked', true);
             $('#notification .modal-footer').hide();
+            $('.channel-config').hide();
+            $('#channel-type').show();
+            modal.find('.modal-title span').text(Lang.get('channels.create'));
         }
-
-        modal.find('.modal-title span').text(title);
     });
 
     $('#notification #channel-type a.btn-app').on('click', function(event) {
         var button = $(event.currentTarget);
         var type = button.data('type');
-
-        $('#notification .modal-footer').show();
-        $('#channel-type').hide();
-        $('#channel-name').show();
-        $('#channel-triggers').show();
-
         setTitleWithIcon(type, 'create');
     });
 
@@ -55,7 +44,7 @@ var app = app || {};
         } else if (type === 'hipchat') {
             element.addClass('fa-flip-horizontal');
             icon = 'comment-o';
-        } else if (type === 'email') {
+        } else if (type === 'mail') {
             icon = 'envelope-o';
         } else if (type === 'twilio') {
             icon = 'mobile';
@@ -63,6 +52,11 @@ var app = app || {};
 
         element.addClass('fa-' + icon);
 
+        $('#notification .modal-footer').show();
+        $('.channel-config').hide();
+        $('#channel-type').hide();
+        $('#channel-name').show();
+        $('#channel-triggers').show();
         $('#channel-config-' + type).show();
     }
 
@@ -116,9 +110,9 @@ var app = app || {};
 
         notification.save({
             name:         $('#notification_name').val(),
-            webhook:      $('#notification_webhook').val(),
-            channel:      $('#notification_channel').val(),
-            icon:         $('#notification_icon').val(),
+            // webhook:      $('#notification_webhook').val(),
+            // channel:      $('#notification_channel').val(),
+            // icon:         $('#notification_icon').val(),
             project_id:   $('input[name="project_id"]').val(),
             //failure_only: $('#notification_failure_only').is(':checked')
         }, {
@@ -161,8 +155,6 @@ var app = app || {};
             }
         });
     });
-
-
 
     app.Notification = Backbone.Model.extend({
         urlRoot: '/notifications'
@@ -253,7 +245,7 @@ var app = app || {};
             data.icon = 'cogs';
             data.label = Lang.get('channels.custom');
 
-            if (this.model.get('type') !== 'webhook') {
+            if (this.model.get('type') !== 'custom') {
                 data.label = Lang.get('channels.' + this.model.get('type'));
             }
 
@@ -275,10 +267,19 @@ var app = app || {};
             // FIXME: Sure this is wrong?
             $('#notification_id').val(this.model.id);
             $('#notification_name').val(this.model.get('name'));
-            $('#notification_webhook').val(this.model.get('webhook'));
-            $('#notification_channel').val(this.model.get('channel'));
-            $('#notification_icon').val(this.model.get('icon'));
-            //$('#notification_failure_only').prop('checked', (this.model.get('failure_only') === true));
+            // $('#notification_webhook').val(this.model.get('webhook'));
+            // $('#notification_channel').val(this.model.get('channel'));
+            // $('#notification_icon').val(this.model.get('icon'));
+            $('#notification_on_deployment_success').prop('checked', (this.model.get('on_deployment_success') === true));
+            $('#notification_on_deployment_failure').prop('checked', (this.model.get('on_deployment_failure') === true));
+            $('#notification_on_link_down').prop('checked', (this.model.get('on_link_down') === true));
+            $('#notification_on_link_recovered').prop('checked', (this.model.get('on_link_recovered') === true));
+            $('#notification_on_heartbeat_missing').prop('checked', (this.model.get('on_heartbeat_missing') === true));
+            $('#notification_on_heartbeat_recovered').prop('checked', (this.model.get('on_heartbeat_recovered') === true));
+
+            setTitleWithIcon(this.model.get('type'), 'edit');
+
+            console.log(this.model.toJSON());
         }
     });
 })(jQuery);

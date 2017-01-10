@@ -1,1 +1,1 @@
-<div class="channel-config" id="channel-config-email">{{ Lang::get('channels.mail') }}</div>
+<div class="channel-config" id="channel-config-mail">{{ Lang::get('channels.mail') }}</div>

@@ -39,7 +39,7 @@ class ChannelTableSeeder extends Seeder
 
         Channel::create([
             'project_id' => 1,
-            'type'       => 'webhook',
+            'type'       => 'custom',
             'name'       => 'Webhook',
             'config'     => [
                 'url' => 'http://requestb.in/19kiuuc1',

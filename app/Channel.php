@@ -17,7 +17,7 @@ class Channel extends Model
     const EMAIL   = 'mail';
     const SLACK   = 'slack';
     const HIPCHAT = 'hipchat';
-    const WEBHOOK = 'webhook';
+    const WEBHOOK = 'custom';
 
     /**
      * The attributes that are mass assignable.
