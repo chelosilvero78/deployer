@@ -3,6 +3,7 @@
 namespace REBELinBLUE\Deployer\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use REBELinBLUE\Deployer\Contracts\Repositories\ChannelRepositoryInterface;
 use REBELinBLUE\Deployer\Contracts\Repositories\CheckUrlRepositoryInterface;
 use REBELinBLUE\Deployer\Contracts\Repositories\CommandRepositoryInterface;
 use REBELinBLUE\Deployer\Contracts\Repositories\ConfigFileRepositoryInterface;
@@ -16,6 +17,7 @@ use REBELinBLUE\Deployer\Contracts\Repositories\SharedFileRepositoryInterface;
 use REBELinBLUE\Deployer\Contracts\Repositories\TemplateRepositoryInterface;
 use REBELinBLUE\Deployer\Contracts\Repositories\UserRepositoryInterface;
 use REBELinBLUE\Deployer\Contracts\Repositories\VariableRepositoryInterface;
+use REBELinBLUE\Deployer\Repositories\EloquentChannelRepository;
 use REBELinBLUE\Deployer\Repositories\EloquentCheckUrlRepository;
 use REBELinBLUE\Deployer\Repositories\EloquentCommandRepository;
 use REBELinBLUE\Deployer\Repositories\EloquentConfigFileRepository;
@@ -37,6 +39,7 @@ use REBELinBLUE\Deployer\Repositories\EloquentVariableRepository;
 class RepositoryServiceProvider extends ServiceProvider
 {
     public $repositories = [
+        ChannelRepositoryInterface::class      => EloquentChannelRepository::class,
         CheckUrlRepositoryInterface::class     => EloquentCheckUrlRepository::class,
         CommandRepositoryInterface::class      => EloquentCommandRepository::class,
         ConfigFileRepositoryInterface::class   => EloquentConfigFileRepository::class,
