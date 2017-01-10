@@ -16,6 +16,7 @@ var app = app || {};
         } else {
             $('#notification_id').val('');
             $('#notification_name').val('');
+            $('#notification_type').val('');
             // $('#notification_webhook').val('');
             // $('#notification_channel').val('');
             // $('#notification_icon').val('');
@@ -58,6 +59,7 @@ var app = app || {};
         $('#channel-name').show();
         $('#channel-triggers').show();
         $('#channel-config-' + type).show();
+        $('#notification_type').val(type);
     }
 
     // FIXME: This seems very wrong
@@ -108,13 +110,22 @@ var app = app || {};
             var notification = new app.Notification();
         }
 
+        /*
+
+         // channel:      $('#notification_channel').val(),
+         // icon:         $('#notification_icon').val(),
+         */
+
         notification.save({
-            name:         $('#notification_name').val(),
-            // webhook:      $('#notification_webhook').val(),
-            // channel:      $('#notification_channel').val(),
-            // icon:         $('#notification_icon').val(),
-            project_id:   $('input[name="project_id"]').val(),
-            //failure_only: $('#notification_failure_only').is(':checked')
+            name:                   $('#notification_name').val(),
+            type:                   'custom',
+            project_id:             $('input[name="project_id"]').val(),
+            on_deployment_success:  $('#notification_on_deployment_success').is(':checked'),
+            on_deployment_failure:  $('#notification_on_deployment_failure').is(':checked'),
+            on_link_down:           $('#notification_on_link_down').is(':checked'),
+            on_link_recovered:      $('#notification_on_link_recovered').is(':checked'),
+            on_heartbeat_missing:   $('#notification_on_heartbeat_missing').is(':checked'),
+            on_heartbeat_recovered: $('#notification_on_heartbeat_recovered').is(':checked')
         }, {
             wait: true,
             success: function(model, response, options) {
@@ -267,6 +278,7 @@ var app = app || {};
             // FIXME: Sure this is wrong?
             $('#notification_id').val(this.model.id);
             $('#notification_name').val(this.model.get('name'));
+            $('#notification_type').val(this.model.get('type'));
             // $('#notification_webhook').val(this.model.get('webhook'));
             // $('#notification_channel').val(this.model.get('channel'));
             // $('#notification_icon').val(this.model.get('icon'));
@@ -278,8 +290,6 @@ var app = app || {};
             $('#notification_on_heartbeat_recovered').prop('checked', (this.model.get('on_heartbeat_recovered') === true));
 
             setTitleWithIcon(this.model.get('type'), 'edit');
-
-            console.log(this.model.toJSON());
         }
     });
 })(jQuery);

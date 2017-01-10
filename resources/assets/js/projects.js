@@ -8,15 +8,17 @@ var app = app || {};
 
     $('select.deployment-source').select2(selectOptions);
 
-    app.listener.on('project:REBELinBLUE\\Deployer\\Events\\ModelChanged', function (data) {
-        if (parseInt(data.model.id) === parseInt(app.project_id)) {
-            resetOptions('select.deployment-source#deployment_branch', data.model.branches);
-            resetOptions('select.deployment-source#deployment_tag', data.model.tags.reverse());
+    if ($('div.tab-content #deployments').length > 0) {
+        app.listener.on('project:REBELinBLUE\\Deployer\\Events\\ModelChanged', function (data) {
+            if (parseInt(data.model.id) === parseInt(app.project_id)) {
+                resetOptions('select.deployment-source#deployment_branch', data.model.branches);
+                resetOptions('select.deployment-source#deployment_tag', data.model.tags.reverse());
 
-            var dialog = $('.modal#reason');
-            resetDialog(dialog);
-        }
-    });
+                var dialog = $('.modal#reason');
+                resetDialog(dialog);
+            }
+        });
+    }
 
     function resetOptions(selector, data) {
         var options = selectOptions;

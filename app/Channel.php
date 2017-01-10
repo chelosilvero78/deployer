@@ -17,6 +17,7 @@ class Channel extends Model
     const EMAIL   = 'mail';
     const SLACK   = 'slack';
     const HIPCHAT = 'hipchat';
+    const TWILIO  = 'twilio';
     const WEBHOOK = 'custom';
 
     /**
