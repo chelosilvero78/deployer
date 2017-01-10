@@ -35,15 +35,25 @@ class StoreChannelRequest extends Request
         ], $rules);
     }
 
-    // FIXME: May be able to convert these to just properties?
+    /**
+     * Validation rules specific to slack.
+     *
+     * @return array
+     */
     private function slackRules()
     {
+        // FIXME: May be able to convert these to just properties?
         return [
             'channel' => 'required|max:255|channel',
             'webhook' => 'required|regex:/^https:\/\/hooks.slack.com\/services\/[a-z0-9]+\/[a-z0-9]+\/[a-z0-9]+$/i',
         ]; // FIXME: Add icon
     }
 
+    /**
+     * Validation rules specific to email.
+     *
+     * @return array
+     */
     private function emailRules()
     {
         return [
@@ -51,6 +61,11 @@ class StoreChannelRequest extends Request
         ];
     }
 
+    /**
+     * Validation rules specific to hipchat.
+     *
+     * @return array
+     */
     private function hipchatRules()
     {
         return [
@@ -58,6 +73,11 @@ class StoreChannelRequest extends Request
         ];
     }
 
+    /**
+     * Validation rules specific to twilio.
+     *
+     * @return array
+     */
     private function twilioRules()
     {
         return [
@@ -65,6 +85,11 @@ class StoreChannelRequest extends Request
         ];
     }
 
+    /**
+     * Validation rules specific to custom channels.
+     *
+     * @return array
+     */
     private function customRules()
     {
         return [
