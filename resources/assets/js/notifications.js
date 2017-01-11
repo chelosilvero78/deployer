@@ -127,6 +127,8 @@ var app = app || {};
             data[name] = $(field).val();
         });
 
+        console.log(data);
+
         notification.save(data, {
             wait: true,
             success: function(model, response, options) {
@@ -195,7 +197,7 @@ var app = app || {};
             this.listenTo(app.Notifications, 'all', this.render);
 
 
-            app.listener.on('notification:REBELinBLUE\\Deployer\\Events\\ModelChanged', function (data) {
+            app.listener.on('channel:REBELinBLUE\\Deployer\\Events\\ModelChanged', function (data) {
                 var notification = app.Notifications.get(parseInt(data.model.id));
 
                 if (server) {
@@ -203,13 +205,13 @@ var app = app || {};
                 }
             });
 
-            app.listener.on('notification:REBELinBLUE\\Deployer\\Events\\ModelCreated', function (data) {
+            app.listener.on('channel:REBELinBLUE\\Deployer\\Events\\ModelCreated', function (data) {
                 if (parseInt(data.model.project_id) === parseInt(app.project_id)) {
                     app.Notifications.add(data.model);
                 }
             });
 
-            app.listener.on('notification:REBELinBLUE\\Deployer\\Events\\ModelTrashed', function (data) {
+            app.listener.on('channel:REBELinBLUE\\Deployer\\Events\\ModelTrashed', function (data) {
                 var notification = app.Notifications.get(parseInt(data.model.id));
 
                 if (notification) {
@@ -227,7 +229,6 @@ var app = app || {};
             }
         },
         addOne: function (notification) {
-
             var view = new app.NotificationView({
                 model: notification
             });

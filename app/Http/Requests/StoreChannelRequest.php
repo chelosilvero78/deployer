@@ -34,7 +34,7 @@ class StoreChannelRequest extends Request
      */
     public function configOnly()
     {
-        return $this->only(array_keys($this->getAdditionalRules()));
+        return $this->only(array_keys($this->configRules()));
     }
 
     /**
@@ -56,7 +56,7 @@ class StoreChannelRequest extends Request
      *
      * @return array
      */
-    private function emailRules()
+    private function mailRules()
     {
         return [
             'email' => 'required|email',
@@ -95,7 +95,7 @@ class StoreChannelRequest extends Request
     private function customRules()
     {
         return [
-            'webhook' => 'required|active_url',
+            'webhook' => 'required|url',
         ];
     }
 

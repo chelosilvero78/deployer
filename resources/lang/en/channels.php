@@ -32,13 +32,13 @@ return [
     'twilio'                 => 'Twilio',
     'mail'                   => 'E-mail',
     'which'                  => 'Which type of notification do you wish to add?',
+    'webhook'                => 'Webhook URL',
 
     // Slack
-    'icon'                  => 'Icon',
-    'bot'                   => 'Bot',
-    'icon_info'             => 'Either an emoji, for example :ghost: or the URL to an image',
-    'webhook'               => 'Webhook URL',
-    'channel'               => 'Channel',
+    'icon'                   => 'Icon',
+    'bot'                    => 'Bot',
+    'icon_info'              => 'Either an emoji, for example :ghost: or the URL to an image',
+    'channel'                => 'Channel',
 
     // Hipchat
     // Twilio
