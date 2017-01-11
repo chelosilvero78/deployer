@@ -79,7 +79,7 @@ var app = app || {};
             url:        $('#url').val(),
             is_report:  true, // $('#is_report').prop('checked'),
             period:     parseInt($('input[name=period]:checked').val()),
-            project_id: $('input[name="project_id"]').val()
+            project_id: parseInt($('input[name="project_id"]').val())
         }, {
             wait: true,
             success: function(model, response, options) {

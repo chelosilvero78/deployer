@@ -17,9 +17,7 @@ var app = app || {};
             $('#notification_id').val('');
             $('#notification_name').val('');
             $('#notification_type').val('');
-            // $('#notification_webhook').val('');
-            // $('#notification_channel').val('');
-            // $('#notification_icon').val('');
+            $('#notification :input[id^=notification_config]').val('');
             $('#notification .channel-config input[type=checkbox]').prop('checked', true);
             $('#notification .modal-footer').hide();
             $('.channel-config').hide();
@@ -110,23 +108,26 @@ var app = app || {};
             var notification = new app.Notification();
         }
 
-        /*
+        var data = {
+          config:                 null,
+          name:                   $('#notification_name').val(),
+          type:                   $('#notification_type').val(),
+          project_id:             parseInt($('input[name="project_id"]').val()),
+          on_deployment_success:  $('#notification_on_deployment_success').is(':checked'),
+          on_deployment_failure:  $('#notification_on_deployment_failure').is(':checked'),
+          on_link_down:           $('#notification_on_link_down').is(':checked'),
+          on_link_recovered:      $('#notification_on_link_recovered').is(':checked'),
+          on_heartbeat_missing:   $('#notification_on_heartbeat_missing').is(':checked'),
+          on_heartbeat_recovered: $('#notification_on_heartbeat_recovered').is(':checked')
+        };
 
-         // channel:      $('#notification_channel').val(),
-         // icon:         $('#notification_icon').val(),
-         */
+        $('#notification #channel-config-' + data.type + ' :input[id^=notification_config]').each(function(key, field) {
+            var name = $(field).attr('name');
 
-        notification.save({
-            name:                   $('#notification_name').val(),
-            type:                   'custom',
-            project_id:             $('input[name="project_id"]').val(),
-            on_deployment_success:  $('#notification_on_deployment_success').is(':checked'),
-            on_deployment_failure:  $('#notification_on_deployment_failure').is(':checked'),
-            on_link_down:           $('#notification_on_link_down').is(':checked'),
-            on_link_recovered:      $('#notification_on_link_recovered').is(':checked'),
-            on_heartbeat_missing:   $('#notification_on_heartbeat_missing').is(':checked'),
-            on_heartbeat_recovered: $('#notification_on_heartbeat_recovered').is(':checked')
-        }, {
+            data[name] = $(field).val();
+        });
+
+        notification.save(data, {
             wait: true,
             success: function(model, response, options) {
                 dialog.modal('hide');
@@ -275,13 +276,16 @@ var app = app || {};
             return this;
         },
         editNotification: function() {
+            var type = this.model.get('type');
+
+            $.each(this.model.get('config'), function(field, value) {
+                $('#channel-config-' + type + ' #notification_config_' + field).val(value);
+            });
+
             // FIXME: Sure this is wrong?
             $('#notification_id').val(this.model.id);
             $('#notification_name').val(this.model.get('name'));
-            $('#notification_type').val(this.model.get('type'));
-            // $('#notification_webhook').val(this.model.get('webhook'));
-            // $('#notification_channel').val(this.model.get('channel'));
-            // $('#notification_icon').val(this.model.get('icon'));
+            $('#notification_type').val(type);
             $('#notification_on_deployment_success').prop('checked', (this.model.get('on_deployment_success') === true));
             $('#notification_on_deployment_failure').prop('checked', (this.model.get('on_deployment_failure') === true));
             $('#notification_on_link_down').prop('checked', (this.model.get('on_link_down') === true));

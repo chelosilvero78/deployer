@@ -76,7 +76,7 @@ var app = app || {};
             name:        $('#name').val(),
             file:        $('#file').val(),
             target_type: $('input[name="target_type"]').val(),
-            target_id:   $('input[name="target_id"]').val()
+            target_id:   parseInt($('input[name="target_id"]').val())
         }, {
             wait: true,
             success: function(model, response, options) {

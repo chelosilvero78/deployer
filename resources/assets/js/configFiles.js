@@ -113,7 +113,7 @@ var app = app || {};
             path:        $('#config-file-path').val(),
             content:     editor.getValue(),
             target_type: $('input[name="target_type"]').val(),
-            target_id:   $('input[name="target_id"]').val()
+            target_id:   parseInt($('input[name="target_id"]').val())
         }, {
             wait: true,
             success: function(model, response, options) {

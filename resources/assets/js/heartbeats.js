@@ -79,7 +79,7 @@ var app = app || {};
         heartbeat.save({
             name:        $('#heartbeat_name').val(),
             interval:    parseInt($('input[name=interval]:checked').val()),
-            project_id:  $('input[name="project_id"]').val()
+            project_id:  parseInt($('input[name="project_id"]').val())
         }, {
             wait: true,
             success: function(model, response, options) {

@@ -185,11 +185,11 @@ var app = app || {};
             name:               $('#project_name').val(),
             repository:         $('#project_repository').val(),
             branch:             $('#project_branch').val(),
-            group_id:           $('#project_group_id').val(),
+            group_id:           parseInt($('#project_group_id').val()),
             builds_to_keep:     $('#project_builds_to_keep').val(),
             url:                $('#project_url').val(),
             build_url:          $('#project_build_url').val(),
-            template_id:        $('#project_template_id') ? $('#project_template_id').val() : null,
+            template_id:        $('#project_template_id') ? parseInt($('#project_template_id').val()) : null,
             allow_other_branch: $('#project_allow_other_branch').is(':checked'),
             include_dev:        $('#project_include_dev').is(':checked'),
             private_key:        $('#project_private_key').val()
