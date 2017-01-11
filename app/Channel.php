@@ -25,7 +25,8 @@ class Channel extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'project_id', 'type', 'config'];
+    protected $fillable = ['name', 'project_id', 'type', 'config', 'on_deployment_success', 'on_deployment_failure',
+                            'on_link_down', 'on_link_recovered', 'on_heartbeat_missing', 'on_heartbeat_recovered', ];
 
     /**
      * The attributes excluded from the model's JSON form.

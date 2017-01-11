@@ -14,14 +14,6 @@ class StoreChannelRequest extends Request
      */
     public function rules()
     {
-        $rules = [];
-
-        // Check if there are specific validation rules for the selected type
-        $type = $this->get('type') . 'Rules';
-        if (method_exists($this, $type)) {
-            $rules = $this->{$type}();
-        }
-
         return array_merge([
             'name'                   => 'required|max:255',
             'project_id'             => 'required|integer|exists:projects,id',
@@ -32,7 +24,17 @@ class StoreChannelRequest extends Request
             'on_link_recovered'      => 'boolean',
             'on_heartbeat_missing'   => 'boolean',
             'on_heartbeat_recovered' => 'boolean',
-        ], $rules);
+        ], $this->configRules());
+    }
+
+    /**
+     * Gets the input which are allowed in the request based on the type.
+     *
+     * @return array
+     */
+    public function configOnly()
+    {
+        return $this->only(array_keys($this->getAdditionalRules()));
     }
 
     /**
@@ -42,11 +44,11 @@ class StoreChannelRequest extends Request
      */
     private function slackRules()
     {
-        // FIXME: May be able to convert these to just properties?
         return [
             'channel' => 'required|max:255|channel',
             'webhook' => 'required|regex:/^https:\/\/hooks.slack.com\/services\/[a-z0-9]+\/[a-z0-9]+\/[a-z0-9]+$/i',
-        ]; // FIXME: Add icon
+            'icon'    => 'string|nullable'
+        ];
     }
 
     /**
@@ -95,5 +97,20 @@ class StoreChannelRequest extends Request
         return [
             'webhook' => 'required|active_url',
         ];
+    }
+
+    /**
+     * Gets the additional rules based on the type from the request.
+     *
+     * @return array
+     */
+    private function configRules()
+    {
+        $type = $this->get('type') . 'Rules';
+        if (method_exists($this, $type)) {
+            return $this->{$type}();
+        }
+
+        return [];
     }
 }

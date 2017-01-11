@@ -29,10 +29,21 @@ class ChannelController extends ResourceController
      */
     public function store(StoreChannelRequest $request)
     {
-        return $this->repository->create($request->only(
+        $input = $request->only(
             'name',
-            'project_id'
-        ));
+            'project_id',
+            'type',
+            'on_deployment_success',
+            'on_deployment_failure',
+            'on_link_down',
+            'on_link_recovered',
+            'on_heartbeat_missing',
+            'on_heartbeat_recovered'
+        );
+
+        $input['config'] = $request->configOnly();
+
+        return $this->repository->create($input);
     }
 
     /**
@@ -45,8 +56,18 @@ class ChannelController extends ResourceController
      */
     public function update($channel_id, StoreChannelRequest $request)
     {
-        return $this->repository->updateById($request->only(
-            'name'
-        ), $channel_id);
+        $input = $request->only(
+            'name',
+            'on_deployment_success',
+            'on_deployment_failure',
+            'on_link_down',
+            'on_link_recovered',
+            'on_heartbeat_missing',
+            'on_heartbeat_recovered'
+        );
+
+        $input['config'] = $request->configOnly();
+
+        return $this->repository->updateById($input, $channel_id);
     }
 }
